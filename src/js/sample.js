@@ -5,7 +5,7 @@ window.echo = console.log.bind(console);
 
 var app = angular.module('myApp', []);
 
-app.controller('myController', ['$scope', '$http', function ($scope, $interval, $http) {
+app.controller('myController', ['$scope', '$interval', '$http', function ($scope, $interval, $http) {
 
   echo('hello');
 
@@ -25,8 +25,6 @@ app.controller('myController', ['$scope', '$http', function ($scope, $interval, 
 
 
   });
-  
-  $scope.weather
 
   $http.jsonp('https://api.ipify.org?format=jsonp&callback=JSON_CALLBACK')
     .then(function callBack (response) {

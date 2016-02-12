@@ -9,21 +9,30 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  
+
 </head>
 
 <body ng-controller="myController">
-  <header>
-
+  <header class="header">
+    <h1>Weather App</h1>
   </header>
 
+  <div class="container">
+    <p>Location:</p>
+    <p>Temperature:</p>
+    <p>Description:</p>
+    <p>Icon:</p>
+
+    <div>
+      <p> {{ myIP }} </p>
+    </div>
+
+    <div>
+      <p> {{ myWiki }} </p>
+    </div>
 
 
-
-
-
-
-
+  </div>
 
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/knockout-3.2.0.min.js"></script>
