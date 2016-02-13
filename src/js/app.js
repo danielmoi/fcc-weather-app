@@ -5,56 +5,31 @@ window.echo = console.log.bind(console);
 
 var app = angular.module('myApp', []);
 
-app.controller('myController', ['$scope', '$http', function ($scope, $interval, $http) {
-
-  echo('hello');
-
-  // this could be done using the .get method
-  // (which is a shortcut method for the following code)
-  $http({
-    method: 'GET',
-    url: 'https://api.ipify.org?format=jsonp&callback=getIP',
-    responseType: 'json'
-  }).then(function getIP(response) {
-    echo(response.data);
-    $scope.myIP = response.data;
-
-
-  }, function errorCallback(response) {
-
+app.factory('getIPdata', ['$http', function ($http, $scope) {
+  var obj = {};
+  obj.stuff = {};
+  obj.data = function () {
+    return $http.jsonp('http://ipinfo.io/json?callback=JSON_CALLBACK')
+      .then(function (response) {
+      obj.stuff.city = response.data.city;
+        echo(obj.stuff.city);
+      
+//        angular.extend($scope.myData.data, response.data);
+      });
+    
+  };
+  return obj;
+}]);
 
 
-  });
+app.controller('myController', ['getIPdata', function (getIPdata) {
   
-  $scope.weather
-
-  $http.jsonp('https://api.ipify.org?format=jsonp&callback=JSON_CALLBACK')
-    .then(function callBack (response) {
-      echo(response.data);
-      $scope.myIP = response.data;
-    });
+  var vm = this;
 
 
-  // this method is a shorthand method 
-  // makes JSONP requests easier
-  $http.jsonp(
-    'https://en.wikipedia.org/w/api.php?action=opensearch&search=Sydney&format=json&callback=JSON_CALLBACK'
-  ).then(function myCallback(response) {
-    echo(response.data);
-    $scope.myWiki = response.data;
-
-
-  }, function errorCallback(response) {
-    echo(response.data);
-    $scope.myWiki = response.data;
-
-
-
-  });
-
-
-
-
+  angular.extend(vm, getIPdata);
+  vm.data();
+  console.dir(vm.stuff.city);
 
 
 
