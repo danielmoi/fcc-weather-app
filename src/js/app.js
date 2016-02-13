@@ -28,29 +28,30 @@ app.factory('jsonIPinfo', ['$http', function ($http) {
   return obj;
 }]);
 
-//app.factory('jsonWeather', function($http) {
-//  var obj = {};
-//  obj.getWeather = function(cityName) {
-//    return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?lat=35.4&lon=139&appid=44db6a862fba0b067b1930da0d769e98')
-//    .then(function (response) {
-//      obj.weather = response.data;
-//      echo(obj.weather);
-//    });
-//    
-//  };
-//  return obj;
-//  
-//});
+app.factory('jsonWeather', function ($http) {
+  var obj = {};
+  obj.getWeather = function (lat, lng) {
+    return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=44db6a862fba0b067b1930da0d769e98')
+      .then(function (response) {
+        obj.weather = response.data;
+        echo(obj.weather);
+      });
 
-app.controller('myController', ['$scope', 'jsonIPinfo', function ($scope, jsonIPinfo) {
+  };
+  return obj;
+
+});
+
+app.controller('myController', ['$scope', 'jsonIPinfo', 'jsonWeather', function ($scope, jsonIPinfo, jsonWeather) {
 
   var vm = this;
 
   angular.extend($scope, jsonIPinfo);
   $scope.getCity();
   console.dir($scope.data.city);
-
-  //  $scope.getWeather($scope.data.city);
+  
+  angular.extend($scope, jsonWeather);
+  $scope.getWeather($scope.data.lat, $scope.data.lng);
 
 
 
