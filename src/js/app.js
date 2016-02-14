@@ -10,10 +10,10 @@ window.dir = console.dir.bind(console);
 
 var app = angular.module('myApp', []);
 
-app.factory('jsonData', ['$http', '$q', function ($http, $q) {
+app.factory('jsonData', ['$http', function ($http) {
   var obj = {};
   obj.data = {};
-  obj.getCity = function () {
+  obj.getData = function () {
     return $http.jsonp('http://ipinfo.io/json?callback=JSON_CALLBACK')
       .then(function (response) {
         angular.extend(obj.data, response.data);
@@ -23,7 +23,7 @@ app.factory('jsonData', ['$http', '$q', function ($http, $q) {
         echo(obj.data);
         //        obj.getWeather(obj.data.lat, obj.data.lng);
         echo('done'); // this appears before weather data
-        return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?callback=JSON_CALLBACK&lat=' + obj.data.lat + '&lon=' + obj.data.lng + '&appid=44db6a862fba0b067b1930da0d769e98')
+        return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?callback=JSON_CALLBACK&lat=' + obj.data.lat + '&lon=' + obj.data.lng + '&units=metric&appid=44db6a862fba0b067b1930da0d769e98')
           .then(function (response) {
             dir(response);
             obj.weather = response.data;
@@ -42,7 +42,7 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
 
   var vm = this;
 
-  jsonData.getCity().then(function () {
+  jsonData.getData().then(function () {
     echo('hi');
     $scope.data = jsonData.data;
     $scope.weather = jsonData.weather;
