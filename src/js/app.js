@@ -50,6 +50,8 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
     $scope.data = jsonData.data;
     $scope.weather = jsonData.weather;
     $scope.weather.tempCurrent = $scope.weather.celcius;
+  $scope.weatherCSS = 'wi wi-owm-' + $scope.weather.weather[0].id;
+    
 
   });
 
@@ -61,18 +63,16 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
       $scope.unitCurrent = 'F';
       $scope.unitOther = 'C';
       $scope.weather.tempCurrent = $scope.weather.fahrenheit;
-      echo($scope.tempCurrent);
-      
       return;
     }
     if ($scope.unitCurrent === 'F') {
       $scope.unitCurrent = 'C';
       $scope.unitOther = 'F';
       $scope.weather.tempCurrent = $scope.weather.celcius;
-      echo($scope.tempCurrent);
       return;
     }
   };
+  
 
 
 
