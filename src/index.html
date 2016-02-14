@@ -20,8 +20,9 @@
   <div class="container">
     <p>Location: {{data.city}}, {{data.region}}</p>
     <p>Temperature: {{ weather.main.temp }} &deg;{{ units }}</p>
-    <p>Description:</p>
-    <p>Icon:</p>
+    <p>Humidity: {{ weather.main.humidity }}% </p>
+    <p>Description: {{ weather.weather[0].description }} </p>
+    <p>Icon: {{ weather.weather[0].icon }} </p>
 
     <div>
       <p> {{ myIP }} </p>
