@@ -67,4 +67,7 @@ button {
   border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 }
