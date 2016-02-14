@@ -23,10 +23,13 @@ app.factory('jsonData', ['$http', function ($http) {
         echo(obj.data);
         //        obj.getWeather(obj.data.lat, obj.data.lng);
         echo('done'); // this appears before weather data
-        return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?callback=JSON_CALLBACK&lat=' + obj.data.lat + '&lon=' + obj.data.lng + '&units=metric&appid=44db6a862fba0b067b1930da0d769e98')
+        return $http.jsonp('http://api.openweathermap.org/data/2.5/weather?callback=JSON_CALLBACK&lat=' + obj.data.lat + '&lon=' + obj.data.lng + '&appid=44db6a862fba0b067b1930da0d769e98')
           .then(function (response) {
             dir(response);
             obj.weather = response.data;
+            obj.weather.celcius = Math.floor(obj.weather.main.temp - 273.15);
+            obj.weather.fahrenheit = Math.floor(obj.weather.main.temp * 9 / 5 - 459.67);
+
             echo(obj.weather);
           });
       });
@@ -46,9 +49,30 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
     echo('hi');
     $scope.data = jsonData.data;
     $scope.weather = jsonData.weather;
+    $scope.weather.tempCurrent = $scope.weather.celcius;
+
   });
-  
-  $scope.units = 'C';
+
+  $scope.unitCurrent = 'C';
+  $scope.unitOther = 'F';
+
+  $scope.convert = function () {
+    if ($scope.unitCurrent === 'C') {
+      $scope.unitCurrent = 'F';
+      $scope.unitOther = 'C';
+      $scope.weather.tempCurrent = $scope.weather.fahrenheit;
+      echo($scope.tempCurrent);
+      
+      return;
+    }
+    if ($scope.unitCurrent === 'F') {
+      $scope.unitCurrent = 'C';
+      $scope.unitOther = 'F';
+      $scope.weather.tempCurrent = $scope.weather.celcius;
+      echo($scope.tempCurrent);
+      return;
+    }
+  };
 
 
 

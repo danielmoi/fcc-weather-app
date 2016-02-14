@@ -19,7 +19,8 @@
 
   <div class="container">
     <p>Location: {{data.city}}, {{data.region}}</p>
-    <p>Temperature: {{ weather.main.temp }} &deg;{{ units }}</p>
+    <p>Temperature: {{ weather.tempCurrent }} &deg;{{ unitCurrent }}</p>
+    <button ng-click="convert()">to {{ unitOther }} </button>
     <p>Humidity: {{ weather.main.humidity }}% </p>
     <p>Description: {{ weather.weather[0].description }} </p>
     <p>Icon: <img ng-src="http://openweathermap.org/img/w/{{ weather.weather[0].icon}}.png"> </p>
