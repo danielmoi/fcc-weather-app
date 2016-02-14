@@ -47,6 +47,8 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
     $scope.data = jsonData.data;
     $scope.weather = jsonData.weather;
   });
+  
+  $scope.units = 'C';
 
 
 
