@@ -9,29 +9,40 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
 </head>
 
 <body ng-controller="myController">
   <header class="header">
-    <h1>Weather App <i ng-class="weatherCSS"></i></h1>
+    <h1>Weather App </h1>
   </header>
 
   <div class="container">
-    <p>Location: {{data.city}}, {{data.region}}, {{ data.country }}</p>
-    <p>Temperature: {{ weather.tempCurrent }} &deg;{{ unitCurrent }}</p>
-    <button ng-click="convert()">to {{ unitOther }} </button>
-    <p>Humidity: {{ weather.main.humidity }}% </p>
-    <p>Description: {{ weather.weather[0].description }} </p>
-    <p>Icon: <img ng-src="http://openweathermap.org/img/w/{{ weather.weather[0].icon}}.png"> </p>
-
-    <div>
-      <p> {{ myIP }} </p>
+    <div class="location">
+      <p>Location: {{data.city}}, {{data.region}}, {{ data.country }}</p>
     </div>
 
-    <div>
-      <p> {{ myWiki }} </p>
+    <div class="weather-icon"><i ng-class="weatherCSS"></i></div>
+
+    <div class="description">
+      <p>{{ weather.weather[0].description }} </p>
     </div>
+
+
+
+    <div class="temp">
+      <p class="current-temp">{{ weather.tempCurrent }} &deg;{{ unitCurrent }} </p>
+      <button ng-click="convert()">change temp to &deg;{{ unitOther }} </button>
+    </div>
+
+    <div class="other">
+
+      <p>Humidity: {{ weather.main.humidity }}%</p>
+      <p>Wind: {{ weather.wind.speed }} km/h</p>
+      <p>Visibility: {{ weather.visibility }} m</p>
+    </div>
+
+
 
 
   </div>

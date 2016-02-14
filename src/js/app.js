@@ -73,10 +73,4 @@ app.controller('myController', ['$scope', 'jsonData', function ($scope, jsonData
     }
   };
   
-
-
-
-
-
-
 }]);
